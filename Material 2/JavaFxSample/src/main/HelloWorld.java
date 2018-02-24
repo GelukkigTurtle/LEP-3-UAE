@@ -12,11 +12,10 @@ public class HelloWorld  extends Application{
 	public static void main (String[] args) {
 		launch(args);
 	}
-	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		   Parent root = null;
+		  Parent root = null;
 	        try {
 	            root = FXMLLoader.load(getClass().getResource("HelloWorld.fxml"));
 	        } catch (Exception e) {
@@ -28,8 +27,11 @@ public class HelloWorld  extends Application{
 
 	        primaryStage.setTitle("Titulo de la App");
 	        primaryStage.setScene(scene);
-	        //primaryStage.centerOnScreen();
-	        primaryStage.show();	
+	        primaryStage.centerOnScreen();
+	        primaryStage.show();			
 	}
+	
+
+
 
 }
