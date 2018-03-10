@@ -98,18 +98,69 @@ public class GuiController implements Initializable {
 	@FXML
 	void eventClickTable(MouseEvent event) {
 		 try {
-             Alumno a = tableData.getSelectionModel().getSelectedItems().get(0);
+			 Alumno a = tableData.getSelectionModel().getSelectedItems().get(0);
              txtNombres.setText(a.getNombre());
              txtApellidos.setText(a.getApellidos());
              txtCUM.setText(a.getCum().toString());
+			
+        
          } catch (Exception e) {
-        	 e.printStackTrace();
+        	// e.printStackTrace();
          }
 	}
 
 	@FXML
 	void eventGuardar(ActionEvent event) {
+		
+		//evaluar si haremos un INSERT o un UPDATE, dependiendo si tengo seleccionado
+		// un regristro en la tabla
+		
+		//Capturar los datos de la vista
+		 String nombres = txtNombres.getText();
+		 String apellidos = txtApellidos.getText();
+		 Float cum = Float.valueOf(txtCUM.getText());
+		
+		 Alumno alumnoSeleccionado = tableData.getSelectionModel().getSelectedItems().get(0);
+
+		 
+		//Si no existe un alumno seleccionado en la tabla hacemos INSERT
+		if( alumnoSeleccionado == null) {
+			
+			 
+			 //Crear un nuevo objeto alumno y lo llenamos con los datos capturados
+			 // se coloca id = 0 ; ya que MySQL generara automaticamente el id
+			 Alumno alumno_a_insertar = new Alumno(0,nombres,apellidos,cum);
+			
+			 //Llamamos el Modelo de Alumno para insertalo en la BDD
+			 AlumnoModel alumnModel = new AlumnoModel();
+			 alumnModel.insert(alumno_a_insertar);
+			 
+			
+		}else {
+			// Si existe un alumno seleccionado en la tabla, hacemos UPDATE
+			Integer idAlumno = alumnoSeleccionado.getIdAlumno();
+			
+			Alumno alumno_a_actualizar = new Alumno(idAlumno,nombres,apellidos,cum);
+			AlumnoModel alumnModel = new AlumnoModel();
+			alumnModel.update(alumno_a_actualizar);
+		}
+		
+		
+		 //Refrescamos la tabla en la vista para que muestre los cambios
+		 this.obtenerAlumnos();
+		 
+		
 		this.dialog(Alert.AlertType.INFORMATION, "Guardar Ejecutado");	
+		
+		//Limpiar los textbox de la vista
+		txtNombres.clear();
+		txtApellidos.clear();
+		txtCUM.clear();
+		
+		
+		
+	
+	
 	}
 
 	@FXML
