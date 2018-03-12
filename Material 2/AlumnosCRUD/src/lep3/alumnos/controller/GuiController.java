@@ -79,6 +79,7 @@ public class GuiController implements Initializable {
 				cellData.getValue().getCum()));
 
 		listData = FXCollections.observableArrayList();
+		
 		this.obtenerAlumnos();
 
 		tableData.getSelectionModel().clearSelection();
@@ -98,14 +99,17 @@ public class GuiController implements Initializable {
 	@FXML
 	void eventClickTable(MouseEvent event) {
 		 try {
-			 Alumno a = tableData.getSelectionModel().getSelectedItems().get(0);
-             txtNombres.setText(a.getNombre());
-             txtApellidos.setText(a.getApellidos());
-             txtCUM.setText(a.getCum().toString());
+			 ObservableList<Alumno> alumnoSeleccionados = tableData.getSelectionModel().getSelectedItems();
+			 if(alumnoSeleccionados.size() >= 1) {
+				 Alumno a = alumnoSeleccionados.get(0);
+	             txtNombres.setText(a.getNombre());
+	             txtApellidos.setText(a.getApellidos());
+	             txtCUM.setText(a.getCum().toString());
+			 }
 			
-        
+       
          } catch (Exception e) {
-        	// e.printStackTrace();
+        	 e.printStackTrace();
          }
 	}
 
@@ -120,11 +124,11 @@ public class GuiController implements Initializable {
 		 String apellidos = txtApellidos.getText();
 		 Float cum = Float.valueOf(txtCUM.getText());
 		
-		 Alumno alumnoSeleccionado = tableData.getSelectionModel().getSelectedItems().get(0);
+		 ObservableList<Alumno> alumnoSeleccionados = tableData.getSelectionModel().getSelectedItems();
 
 		 
 		//Si no existe un alumno seleccionado en la tabla hacemos INSERT
-		if( alumnoSeleccionado == null) {
+		if( alumnoSeleccionados.size() < 1) {
 			
 			 
 			 //Crear un nuevo objeto alumno y lo llenamos con los datos capturados
@@ -138,7 +142,7 @@ public class GuiController implements Initializable {
 			
 		}else {
 			// Si existe un alumno seleccionado en la tabla, hacemos UPDATE
-			Integer idAlumno = alumnoSeleccionado.getIdAlumno();
+			Integer idAlumno = alumnoSeleccionados.get(0).getIdAlumno();
 			
 			Alumno alumno_a_actualizar = new Alumno(idAlumno,nombres,apellidos,cum);
 			AlumnoModel alumnModel = new AlumnoModel();
@@ -165,6 +169,8 @@ public class GuiController implements Initializable {
 
 	@FXML
 	void eventLimpiar(ActionEvent event) {
+		// Deseleccionamos el Alumno en la tabla
+		tableData.getSelectionModel().clearSelection();
 
 	}
 	

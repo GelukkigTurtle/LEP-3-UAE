@@ -14,6 +14,8 @@ public class AlumnoModel {
 		try {
 			conn = new ConexionBDD().getConnection();
 			 String sql = "Select * from Alumno";
+ 			 System.out.println(sql);
+
 			  ResultSet rs = conn.createStatement().executeQuery(sql);
 	            while (rs.next()) {       
 	                Alumno a = new Alumno();
@@ -52,6 +54,12 @@ public class AlumnoModel {
 			ps.setString(1, alumno.getNombre());
 			ps.setString(2, alumno.getApellidos());
 			ps.setFloat(3, alumno.getCum());
+			
+			System.out.println(insert);
+			System.out.println("1) "+alumno.getNombre());
+			System.out.println("2) "+alumno.getApellidos());
+			System.out.println("3) "+alumno.getCum());
+			
 			//Ejecutamos el query en la base de datos
 			ps.executeUpdate();
 
@@ -81,6 +89,12 @@ public class AlumnoModel {
 			ps.setFloat(3, alumno.getCum());
 			ps.setInt(4, alumno.getIdAlumno());
 			
+			System.out.println(update);
+			System.out.println("1) "+alumno.getNombre());
+			System.out.println("2) "+alumno.getApellidos());
+			System.out.println("3) "+alumno.getCum());
+			System.out.println("4) "+alumno.getIdAlumno());
+
 			//Ejecutamos el query en la base de datos
 			ps.executeUpdate();
 			
