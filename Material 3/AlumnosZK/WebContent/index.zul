@@ -1,0 +1,29 @@
+<?page title="Auto Generated index.zul"?>
+<window apply="com.uae.alumno.controlador.AlumnoController" title="Alumnos" border="normal" width="500px">
+
+<listbox id="lstAlumnos" >
+	<listhead>
+		<listheader label="id" sort="auto" />
+		<listheader label="Nombres" sort="auto" />
+		<listheader label="Apellidos" sort="auto" />
+		<listheader label="Edad" sort="auto" />
+		<listheader label="CUM" sort="auto" />
+	</listhead>
+	
+</listbox>
+
+
+</window>
+
+
+
+
+
+
+
+
+
+
+
+
+
