@@ -1,5 +1,5 @@
 <?page title="Auto Generated index.zul"?>
-<window apply="com.uae.alumno.controlador.AlumnoController" title="Alumnos" border="normal" width="500px">
+<window apply="com.uae.alumno.controlador.AlumnoController" title="Alumnos" border="normal" width="100%">
 
 <listbox id="lstAlumnos" >
 	<listhead>
@@ -9,8 +9,28 @@
 		<listheader label="Edad" sort="auto" />
 		<listheader label="CUM" sort="auto" />
 	</listhead>
-	
 </listbox>
+<separator bar="true"/>
+<hlayout >
+	<vlayout>
+		<label value="Nombres"></label>
+		<textbox id="txtNombres"/>
+		
+		<label value="Apellidos"></label>
+		<textbox id="txtApellidos"/>
+		
+		<label value="Edad"></label>
+		<textbox id="txtEdad"/>
+		
+		<label value="CUM"></label>
+		<textbox id="txtCUM"/>
+		
+	</vlayout>
+	<button id="btnGuardar" label="Guardar"></button>
+	<button id="btnEliminar" label="Eliminar"></button>
+	
+</hlayout>
+
 
 
 </window>

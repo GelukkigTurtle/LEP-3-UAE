@@ -83,18 +83,20 @@ public class AlumnoModel {
 		Connection conn = null;
 		try {
 			conn = new ConexionBDD().getConnection();
-			String update = "UPDATE Alumno set nombres = ? , apellidos = ? , CUM = ? Where idAlumno = ?";
+			String update = "UPDATE Alumno set nombres = ? , apellidos = ? , CUM = ?, edad = ? Where idAlumno = ?";
 			PreparedStatement ps = conn.prepareStatement(update);
 			ps.setString(1, alumno.getNombre());
 			ps.setString(2, alumno.getApellidos());
 			ps.setFloat(3, alumno.getCum());
-			ps.setInt(4, alumno.getIdAlumno());
+			ps.setFloat(4, alumno.getEdad());
+			ps.setInt(5, alumno.getIdAlumno());
 			
 			System.out.println(update);
 			System.out.println("1) "+alumno.getNombre());
 			System.out.println("2) "+alumno.getApellidos());
 			System.out.println("3) "+alumno.getCum());
-			System.out.println("4) "+alumno.getIdAlumno());
+			System.out.println("4) "+alumno.getEdad());
+			System.out.println("5) "+alumno.getIdAlumno());
 
 			//Ejecutamos el query en la base de datos
 			ps.executeUpdate();
@@ -111,6 +113,27 @@ public class AlumnoModel {
 	}
 	
 	public void delete(Alumno alumno) {
+		Connection conn = null;
+		try {
+			conn = new ConexionBDD().getConnection();
+			String  query = "Delete from Alumno where idAlumno = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, alumno.getIdAlumno());
+			
+			System.out.println(query);
+			System.out.println("1) "+alumno.getIdAlumno());
+			
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
